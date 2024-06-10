@@ -1,0 +1,27 @@
+<div *ngIf="movie" class="row">
+  <div class="col-xs-12">
+    <img
+      [src]="movie.imagePath"
+      alt="{{ movie.title }}"
+      class="img-responsive"
+      style="max-height: 500px;">
+  </div>
+</div>
+<div *ngIf="movie" class="row">
+  <div class="col-xs-12">
+    <h1>{{ movie.title }}</h1>
+    <p>Release Year: {{ movie.releaseYear}}</p>
+    <p>Genre: {{ movie.genre}}</p>
+    <p>Synopsis: {{ movie.description }}</p>
+    <p>Watched : {{ movie.status}}</p>
+    <p>Rating: {{ movie.rating }}</p>
+  </div>
+</div>
+<div *ngIf="movie" class="row">
+  <div class="col-xs-12">
+    <button (click)="onEditMovie()" class="btn btn-success" type="submit">Edit Movie</button>
+    <button (click)="onDeleteMovie()" class="btn btn-danger" type="button">Delete Movie</button>
+  </div>
+</div>
+
+

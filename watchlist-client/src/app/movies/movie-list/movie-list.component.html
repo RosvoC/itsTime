@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <button (click)="onAddMovie()" class="btn btn-success">Add Movie</button>
+  </div>
+</div>
+<br>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-movie-item
+      *ngFor="let movie of movies; let i = index"
+      [index]="i" [movie]="movie"></app-movie-item>
+  </div>
+</div>

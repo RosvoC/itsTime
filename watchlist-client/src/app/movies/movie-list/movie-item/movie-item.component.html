@@ -1,0 +1,9 @@
+<a (click)="onMovieClicked(movie.id)" class="list-group-item clearfix" routerLinkActive="active" style="cursor: pointer;">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">Title: {{ movie.title }}</h4>
+    <p class="list-group-item-text">Release Year: {{ movie.releaseYear }}</p>
+  </div>
+  <span class="pull-right">
+    <img [src]="movie.imagePath" alt="{{ movie.title }}" class="img-responsive" style="max-height: 50px;">
+  </span>
+</a>

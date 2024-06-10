@@ -1,0 +1,12 @@
+3 servies
+1. database postgres15
+2. backend service node:20----done
+3. frontend Service node:20----done
+image name - backedend
+
+look up build_context
+docker-compose ENV_FILE
+
+create docker compose file,
+backend services that exposes port 3000 which depend on postgres15 which exposes 5432
+frontend service that uses angular and exposes port 4200.

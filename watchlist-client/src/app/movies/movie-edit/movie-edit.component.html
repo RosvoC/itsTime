@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-xs-12">
+    <p> All fields with * are required!</p>
+    <form (ngSubmit)="onSubmit()" [formGroup]="movieForm">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="title">Title*</label>
+            <input class="form-control" formControlName="title" id="title" type="text">
+          </div>
+          <div class="form-group">
+            <label for="releaseYear">Release Year*</label>
+            <input class="form-control" formControlName="releaseYear" id="releaseYear" type="text">
+            <div *ngIf="movieForm.get('releaseYear').hasError('minlength') ||
+              movieForm.get('releaseYear').hasError('maxlength') ||
+              movieForm.get('releaseYear').hasError('numbersOnly')">
+              Please enter a valid year, e.g. 1999
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="genre">Genre*</label>
+            <select class="form-control" formControlName="genre" id="genre">
+              <option *ngFor="let genre of genreOptions" [value]="genre">{{ genre }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="status">Watch Status</label>
+              <select class="form-control" formControlName="status" id="status">
+                <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="rating">Rating (from 1 to 5)</label>
+              <div class="input-group">
+                <input class="form-control" formControlName="rating" id="rating" readonly type="text">
+                <span class="input-group-btn">
+                  <button (click)="increaseRating()" [disabled]="!isRatingEnabled()" class="btn btn-default" type="button">+</button>
+                  <button (click)="decreaseRating()" [disabled]="!isRatingEnabled()" class="btn btn-default" type="button">-</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL*</label>
+            <input #imagePath class="form-control" formControlName="imagePath" id="imagePath" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" alt="title" class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description*</label>
+            <textarea class="form-control" formControlName="description" id="description" rows="6" type="text"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button [disabled]="!movieForm.valid" class="btn btn-success" type="submit">Save</button>
+            <button (click)="onCancel()" class="btn btn-danger" type="button">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

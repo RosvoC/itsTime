@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Signup</h2>
+      <div *ngIf="signupFailureMessage" class="signup-failure-message">
+        {{ signupFailureMessage }}
+      </div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="signupForm">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input class="form-control" formControlName="name" id="name" type="text" />
+          <div *ngIf="signupForm.get('name').hasError('minlength')">Name must be at least 3 characters long.</div>
+          <div *ngIf="signupForm.get('name').hasError('maxlength')">Name must not exceed 20 characters.</div>
+          <div *ngIf="signupForm.get('name').hasError('alphabetsOnly')">Name must contain only alphabets.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="surname">Surname:</label>
+          <input class="form-control" formControlName="surname" id="surname" type="text"/>
+        <div *ngIf="signupForm.get('surname').hasError('minlength')">
+          <div *ngIf="signupForm.get('name').hasError('minlength')">Surname must be at least 3 characters long.</div>
+          <div *ngIf="signupForm.get('name').hasError('maxlength')">Surname must not exceed 20 characters.</div>
+          <div *ngIf="signupForm.get('name').hasError('alphabetsOnly')">Surname must contain only alphabets.</div>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label for="idNumber">South African ID Number:</label>
+          <input class="form-control" formControlName="idNumber" id="idNumber" type="text"/>
+          <div *ngIf="signupForm.get('idNumber').errors?.existingIdNumber && signupForm.get('idNumber').touched">{{ signupForm.get('idNumber').errors.existingIdNumber}}</div>
+          <div *ngIf="signupForm.get('idNumber').hasError('minlength')">ID Number must be exactly 13 digits long.</div>
+          <div *ngIf="signupForm.get('idNumber').hasError('maxlength')">ID Number must be exactly 13 digits long.</div>
+          <div *ngIf="signupForm.get('idNumber').hasError('digitsOnly')">ID Number must contain only digits.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input class="form-control" formControlName="email" id="email" type="email"/>
+          <div *ngIf="signupForm.get('email').hasError('email')">Please Enter a valid email address.</div>
+          <div *ngIf="signupForm.get('email').errors?.existingEmail && signupForm.get('email').touched">{{ signupForm.get('email').errors.existingEmail }}</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input class="form-control" formControlName="password" id="password" type="password"/>
+          <div *ngIf="signupForm.get('password').hasError('minlength')">Password should have at least 8 character, a number, uppercase, and lowercase letters</div>
+        </div>
+        <button [disabled]="signupForm.invalid" class="btn btn-primary" type="submit" >Signup</button>
+      </form>
+    </div>
+  </div>
+</div>
+

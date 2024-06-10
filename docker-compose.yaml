@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:15
+    #restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./database/.env.database.dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./watchlist-management
+      dockerfile: Dockerfile
+    #ports:
+    #  - "3000:3000"
+    depends_on:
+      - postgres
+    env_file:
+      - ./watchlist-management/.env.stage.dev
+    volumes:
+      - "./watchlist-management/src:/app/src"
+
+  frontend:
+    build:
+      context: ./watchlist-client
+      dockerfile: Dockerfile
+    #ports:
+    #  - "4200:4200"
+    volumes:
+      - "./watchlist-client/src:/app/src"
+
+  nginx:
+    image: nginx:latest
+    #restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+volumes:
+  postgres_data:
