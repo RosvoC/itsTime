@@ -1,0 +1,24 @@
+<div *ngIf="userDetails; else noDetails">
+  <h2>User Profile</h2>
+  <table>
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td>{{ userDetails.name }}</td>
+    </tr>
+    <tr>
+      <td><strong>Surname:</strong></td>
+      <td>{{ userDetails.surname }}</td>
+    </tr>
+    <tr>
+      <td><strong>Email:</strong></td>
+      <td>{{ userDetails.email }}</td>
+    </tr>
+    <tr>
+      <td><strong>ID number:</strong></td>
+      <td>{{ userDetails.idNumber }}</td>
+    </tr>
+  </table>
+</div>
+<ng-template #noDetails>
+  <p>{{ error ? error : message }}</p>
+</ng-template>
